@@ -5,7 +5,6 @@ const App = () => {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState('');
 
-  // Adds a new task to the To-Do list
   const addTask = () => {
     if (newTask.trim()) {
       setTasks([...tasks, { id: Date.now(), text: newTask, status: 'To-Do' }]);
@@ -13,29 +12,29 @@ const App = () => {
     }
   };
 
-  // Moves a task to the next status
+
   const moveTask = (taskId) => {
     setTasks(tasks.map((task) => 
       task.id === taskId ? { ...task, status: nextStatus(task.status) } : task
     ));
   };
 
-  // Determines the next status of a task, preventing cycling from Completed to To-Do
+  
   const nextStatus = (currentStatus) => {
     switch (currentStatus) {
       case 'To-Do': return 'inProgress';
       case 'inProgress': return 'Completed';
-      case 'Completed': return 'Completed'; // Stay in Completed state
+      case 'Completed': return 'Completed'; 
       default: return 'To-Do';
     }
   };
 
-  // Deletes a task
+
   const deleteTask = (taskId) => {
     setTasks(tasks.filter(task => task.id !== taskId));
   };
 
-  // Renders tasks by status
+
   const renderTasksByStatus = (status) => {
     return tasks
       .filter(task => task.status === status)
@@ -50,7 +49,6 @@ const App = () => {
       ));
   };
 
-  // Handles the Enter key event to add tasks
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
       addTask();
